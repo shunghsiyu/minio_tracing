@@ -4,9 +4,12 @@ ARG dlv_version=v1.0.0
 ARG minio_version=RELEASE.2018-03-16T22-52-12Z
 ARG uid=1999
 RUN apk update && \
-    apk add build-base git
+    apk add \
+        build-base \
+        git
 RUN adduser -D -u $uid $user
 USER $user
+RUN mkdir minio_A minio_B minio_C minio_D
 ENV GOPATH /home/$user/go
 ENV PATH $GOPATH/bin:$PATH
 RUN go get -d -u github.com/derekparker/delve/cmd/dlv && \
